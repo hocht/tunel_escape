@@ -1,7 +1,7 @@
 # Tunnel Escape
 ## A shooter with tower defense elements and coverages
 
-### enlace a documento de diseño [Documento de diseño](https://app.nuclino.com/Research-and-Development1/Game-design/Game-overview-1efab2da-a7ea-4d71-a6b7-97e15e440891).
+### [Documento de diseño](https://app.nuclino.com/Research-and-Development1/Game-design/Game-overview-1efab2da-a7ea-4d71-a6b7-97e15e440891)
 
 En Túnel Escape controlamos a una chica que dispara hacia el frente del túnel
 y puede moverse libremente dentro de un área de cobertura limitada y tomar
