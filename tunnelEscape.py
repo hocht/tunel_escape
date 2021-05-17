@@ -1,4 +1,5 @@
 import sys
+
 import pygame
 
 from settings import Settings
@@ -22,16 +23,22 @@ class TunnelEscape:
     def run_game(self):
         """start the main loop for the game"""
         while True:
-            #watch for keyboard and mouse events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            #make the most recently drawn screen visible.
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
+            self._check_events()
+            self._update_screen()
+            
+    def _check_events(self):
+    #watch for keyboard and mouse events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            
+    def _update_screen(self):
+    #make the most recently drawn screen visible.
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        # make the most recently drawn screen visible
+        pygame.display.flip()
 
-            # make the most recently drawn screen visible
-            pygame.display.flip()
 if __name__ == '__main__':
     # make a game instance and run the game
     ai = TunnelEscape()
