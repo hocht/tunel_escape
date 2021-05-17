@@ -26,7 +26,7 @@ class TunnelEscape:
                 #make the most recently drawn screen visible.
                 self.screen.fill(self.settings.bg_color)
                 # make the most recently drawn screen visible
-                pygame.display.flip()
+            pygame.display.flip()
 if __name__ == '__main__':
     # make a game instance and run the game
     ai = TunnelEscape()
