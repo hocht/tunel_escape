@@ -46,6 +46,7 @@ class TunnelEscape:
                 self._check_keyup_events(event)
             elif event.type == pygame.JOYAXISMOTION:
                 self._check_axis_events(event)
+                print(self.controlador.gamepad.get_axis(0))
 
     
     def _check_keydown_events(self,event):
@@ -65,16 +66,13 @@ class TunnelEscape:
     
     def _check_axis_events(self,event):
         if event.axis == 1:
-            if event.value > 0:
-                print("derecha")
+            if self.controlador.gamepad.get_axis(0) > 0.2:
                 self.ship.moving_left = False
                 self.ship.moving_right = True
-            elif event.value < 0:
-                print("Izquierda")
+            elif self.controlador.gamepad.get_axis(0) < -0.2:
                 self.ship.moving_right = False
                 self.ship.moving_left = True
-            elif event.value == 0:
-                print("Cero")
+            elif self.controlador.gamepad.get_axis(0) == 0:
                 self.ship.moving_right = False
                 self.ship.moving_left = False
 
