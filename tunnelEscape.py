@@ -44,6 +44,7 @@ class TunnelEscape:
     def _check_events(self):
             #watch for keyboard and mouse events
             for event in pygame.event.get():
+                print(event.type)
                 if event.type == pygame.QUIT:
                     sys.exit()
 
