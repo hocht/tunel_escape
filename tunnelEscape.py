@@ -36,7 +36,6 @@ class TunnelEscape:
         """check for new events"""
         for event in pygame.event.get():
             #imprime el tipo de eventos
-            print(event)
 
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -45,6 +44,9 @@ class TunnelEscape:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.JOYAXISMOTION:
+                self._check_axis_events(event)
+
     
     def _check_keydown_events(self,event):
         """ respond to keypresses"""
@@ -60,6 +62,23 @@ class TunnelEscape:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+    
+    def _check_axis_events(self,event):
+        if event.axis == 1:
+            if event.value > 0:
+                print("derecha")
+                self.ship.moving_left = False
+                self.ship.moving_right = True
+            elif event.value < 0:
+                print("Izquierda")
+                self.ship.moving_right = False
+                self.ship.moving_left = True
+            elif event.value == 0:
+                print("Cero")
+                self.ship.moving_right = False
+                self.ship.moving_left = False
+
+        #<Event(1536-JoyAxisMotion {'joy': 0, 'instance_id': 0, 'axis': 1, 'value': 0.0})>
 
     def _update_screen(self):
     #make the most recently drawn screen visible.
