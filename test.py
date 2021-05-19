@@ -57,7 +57,12 @@ def main():
                         background.fill((255, 255, 255))
                 elif event.type == pygame.JOYHATMOTION:
                     print ("Joystick '",joysticks[event.joy].get_name(),"' hat",event.hat," moved.")
-                    
+                    #(0,0) no hat is pressed
+                    #(1,0) pressed to the right
+                    #(-1,0) pressed left
+                    #(0,1) pressed up
+                    #(0,-1) pressed down
+                    #hat (int) the hat that moved
         screen.blit(background, (0, 0))
         pygame.display.flip()
 
