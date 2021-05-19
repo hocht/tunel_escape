@@ -53,6 +53,7 @@ class TunnelEscape:
                     self._check_keyup_events(event)
                 elif event.type == pygame.JOYHATMOTION:
                     self._check_hat_events(event)
+                    print("hola")
                 elif event.type == pygame.JOYBUTTONDOWN:
                     print(event.type)
                 elif event.type == pygame.JOYAXISMOTION:
@@ -84,7 +85,7 @@ class TunnelEscape:
        elif self.joysticks[-1].get_hat(0) == (0,0):
            self.ship.moving_left = False
 
-           
+
     def _update_screen(self):
     #make the most recently drawn screen visible.
         self.screen.fill(self.settings.bg_color)
