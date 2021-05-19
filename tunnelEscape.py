@@ -13,9 +13,12 @@ class TunnelEscape:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height))
+
+        #self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        #self.settings.screen_width = self.screen.get_rect().width
+        #self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Tunnel escape") 
 
         self.ship = Ship(self)
@@ -28,15 +31,18 @@ class TunnelEscape:
             self._update_screen()
             
     def _check_events(self):
-            for event in pygame.event.get():
-                print(event)
-                if event.type == pygame.QUIT:
-                    sys.exit()
+        """check for new events"""
+        for event in pygame.event.get():
+            #imprime el tipo de eventos
+            print(event.event_name)
 
-                elif event.type == pygame.KEYDOWN:
-                    self._check_keydown_events(event)
-                elif event.type == pygame.KEYUP:
-                    self._check_keyup_events(event)
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_events(event)
     
     def _check_keydown_events(self,event):
         """ respond to keypresses"""

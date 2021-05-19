@@ -10,11 +10,12 @@ gamepadsConectados = [pygame.joystick.Joystick(x) for x in
 if len(gamepadsConectados) > 0:
    gamepad = gamepadsConectados[-1]
    gamepad.init()
-   print(gamepad.get_id())
-   print(gamepad.get_name())
-   print(gamepad.get_numaxes())
-   print(gamepad.get_numbuttons())
-   print(gamepad.get_numhats())
+   print("Id: ",gamepad.get_id())
+   print("Name: ",gamepad.get_name())
+   print("Num of axes: ",gamepad.get_numaxes())
+   print("Num of buttons: ",gamepad.get_numbuttons())
+   print("num of hats: ",gamepad.get_numhats())
+   print("intancia:",gamepad.get_instance_id())
 
 else:
     print("no hay controles conectados")
