@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
+from Gamepad import controlador
 
 class TunnelEscape:
     """Overall class to manage game assets and behaivor"""
@@ -12,6 +13,7 @@ class TunnelEscape:
         """ initialize the game, and create game resources"""
         pygame.init()
         self.settings = Settings()
+        self.controlador = controlador()
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
@@ -34,7 +36,7 @@ class TunnelEscape:
         """check for new events"""
         for event in pygame.event.get():
             #imprime el tipo de eventos
-            print(event.event_name)
+            print(event)
 
             if event.type == pygame.QUIT:
                 sys.exit()

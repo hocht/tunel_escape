@@ -1,24 +1,20 @@
 import pygame
 
-#class controlador:
+class controlador:
 
-    #def __init__(self):
+    def __init__(self):
 
-pygame.joystick.init()
-gamepadsConectados = [pygame.joystick.Joystick(x) for x in 
-                      range (pygame.joystick.get_count())]
-if len(gamepadsConectados) > 0:
-   gamepad = gamepadsConectados[-1]
-   gamepad.init()
-   print("Id: ",gamepad.get_id())
-   print("Name: ",gamepad.get_name())
-   print("Num of axes: ",gamepad.get_numaxes())
-   print("Num of buttons: ",gamepad.get_numbuttons())
-   print("num of hats: ",gamepad.get_numhats())
-   print("intancia:",gamepad.get_instance_id())
+        pygame.joystick.init()
+        gamepadsConectados = [pygame.joystick.Joystick(x) for x in 
+                            range (pygame.joystick.get_count())]
+        if len(gamepadsConectados) > 0:
+            self.gamepad = gamepadsConectados[-1]
+            self.gamepad.init()
+            print("Id: ",self.gamepad.get_id())
+            print("Name: ",self.gamepad.get_name())
+            print("Num of axes: ",self.gamepad.get_numaxes())
+            print("Num of buttons: ",self.gamepad.get_numbuttons())
+            print("num of hats: ",self.gamepad.get_numhats())
 
-else:
-    print("no hay controles conectados")
-
-##juego = controlador()
-#controlador.__init__()
+        else:
+            print("no hay controles conectados")
