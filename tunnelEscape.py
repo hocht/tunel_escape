@@ -15,6 +15,7 @@ class TunnelEscape:
         self.settings = Settings()
         self.controlador = controlador()
 
+        #lo uso para pruebas de terminal
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
 
@@ -46,8 +47,10 @@ class TunnelEscape:
                 self._check_keyup_events(event)
             elif event.type == pygame.JOYAXISMOTION:
                 self._check_axis_events(event)
-                print(self.controlador.gamepad.get_axis(0))
-
+            elif event.type == pygame.JOYBUTTONDOWN:
+                self._check_buttonDown_events(event)
+            elif event.type == pygame.JOYBUTTONUP:
+                self._check_buttonUp_events(event)
     
     def _check_keydown_events(self,event):
         """ respond to keypresses"""
@@ -66,17 +69,23 @@ class TunnelEscape:
     
     def _check_axis_events(self,event):
         if event.axis == 1:
-            if self.controlador.gamepad.get_axis(0) > 0.2:
+            if self.controlador.gamepad.get_axis(0) > 0.1:
                 self.ship.moving_left = False
                 self.ship.moving_right = True
-            elif self.controlador.gamepad.get_axis(0) < -0.2:
+            elif self.controlador.gamepad.get_axis(0) < -0.1:
                 self.ship.moving_right = False
                 self.ship.moving_left = True
             elif self.controlador.gamepad.get_axis(0) == 0:
                 self.ship.moving_right = False
                 self.ship.moving_left = False
-
-        #<Event(1536-JoyAxisMotion {'joy': 0, 'instance_id': 0, 'axis': 1, 'value': 0.0})>
+    
+    def _check_buttonDown_events(self,event):
+        if event.button == 6:
+            sys.exit()
+        print(event.button,"fue pulsado")
+    
+    def _check_buttonUp_events(self,event):
+        print(event.button,"fue liberado")
 
     def _update_screen(self):
     #make the most recently drawn screen visible.
