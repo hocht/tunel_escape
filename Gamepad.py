@@ -2,6 +2,7 @@ import pygame
 
 class controlador:
     """ crea un objeto controlador y lo inicializa"""
+    
     def __init__(self):
         """detecta los gamepads conectados y crea uno para iniciarlo"""
         pygame.joystick.init()
