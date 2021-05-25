@@ -111,6 +111,10 @@ class TunnelEscape:
         elif event.button == 0:
             self._fire_bullet()
         elif event.button == 7:
+
+            # Reset the game settings.
+            self.settings.initialize_dynamic_settings()
+            
              # Reset the game statistics.
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -125,7 +129,6 @@ class TunnelEscape:
 
             # hide the mouse cursor.
             pygame.mouse.set_visible(False)
-            
 
     def _check_buttonUp_events(self,event):
         """ respond to buttonReleased gamepad events"""
@@ -134,6 +137,9 @@ class TunnelEscape:
         """ Start a new game when the player clicks Play"""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
+
+            # Reset the game settings.
+            self.settings.initialize_dynamic_settings()
 
             # Reset the game statistics.
             self.stats.reset_stats()
@@ -181,6 +187,7 @@ class TunnelEscape:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _update_aliens(self):
         """ check if the fleet is at an edge, then update the position of
