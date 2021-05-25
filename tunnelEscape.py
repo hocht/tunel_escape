@@ -7,6 +7,7 @@ from pygame.event import pump
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
 from gamepad import controlador
@@ -30,10 +31,12 @@ class TunnelEscape:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Tunnel escape") 
 
-        #create an instance to store game statics.
+        # Create an instance to store game statics,
+        # And create a scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
-        #crea una nueva nave a partir de la clase
+        # Crea una nueva nave a partir de la clase
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -118,6 +121,9 @@ class TunnelEscape:
              # Reset the game statistics.
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
+            self.sb.prep_level()
+            self.sb.prep_ships()
 
             # Get rid of any remaining aliens and bullets
             self.aliens.empty()
@@ -144,6 +150,9 @@ class TunnelEscape:
             # Reset the game statistics.
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
+            self.sb.prep_level()
+            self.sb.prep_ships()
 
             # Get rid of any remaining aliens and bullets
             self.aliens.empty()
@@ -189,6 +198,17 @@ class TunnelEscape:
             self._create_fleet()
             self.settings.increase_speed()
 
+            #increase level.
+            self.stats.level += 1
+            self.sb.prep_level()
+
+
+        if collisions:
+            for aliens in collisions.values():  
+                self.stats.score += self.settings.alien_points * len(aliens) 
+            self.sb.prep_score()
+            self.sb.check_high_score()
+
     def _update_aliens(self):
         """ check if the fleet is at an edge, then update the position of
          aliens in the fleet"""
@@ -205,8 +225,9 @@ class TunnelEscape:
     def _ship_hit(self):
         """Respond to the ship being hit by an alien"""
         if self.stats.ships_left > 0:
-            # Decrement ships_left
+            # Decrement ships_left and update scoreboard
             self.stats.ships_left -=1
+            self.sb.prep_ships()
 
             # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
@@ -283,6 +304,9 @@ class TunnelEscape:
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
+        # Draw the score information.
+        self.sb.show_score()
+
         # Draw the play button if the game is inactive
         if not self.stats.game_active:
             self.play_button.draw_button()
@@ -294,8 +318,3 @@ class TunnelEscape:
 if __name__ == '__main__':
     ai = TunnelEscape()
     ai.run_game()
-    
-            
-
-        
-
